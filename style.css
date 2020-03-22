@@ -49,8 +49,36 @@ button, a {
 }
 
 .main-nav .nav-colapsed {
+  height: 0;
+  will-change: height;
+  overflow-y: hidden;
+  overflow-x: visible;
   flex-basis: 100%;
   margin-top: 10px;
+  box-shadow: 0 20px 0 0 var(--bg), 0 22px 0 0 var(--border-grey);
+}
+
+.show {
+  animation: growDown 0.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+
+@keyframes growDown {
+  100% {
+    height: 326.5px;
+  }
+}
+
+.shrink {
+  animation: growUp 0.5s cubic-bezier(0.86, 0, 0.07, 1) forwards;
+}
+
+@keyframes growUp {
+  0% {
+    height: 326.5px;
+  }
+  100% {
+    height: 0px;
+  }
 }
 
 .main-nav .left, .main-nav .right {
@@ -251,7 +279,7 @@ button, a {
   margin-bottom: 30px;
 }
 
-.main-text h2 span {
+.main-text h2 .smol {
   font-weight: 600;
 }
 
@@ -292,6 +320,10 @@ button, a {
 
 .fa-bars:hover {
   color: var(--link-grey);
+  transform: scaleX(10) scaleY(1.5);
+}
+
+.pressed {
   transform: scaleX(2) scaleY(1.5);
 }
 
@@ -333,7 +365,7 @@ button, a {
   }
 }
 
-@media only screen and (max-width: 665px) {
+@media only screen and (max-width: 600px) {
   .main-nav .left, .main-nav .right {
     display: none;
   }
@@ -349,4 +381,159 @@ button, a {
 
 .hidden {
   display: none;
+}
+
+.cover {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  height: calc(100% - 50px);
+  width: 100vw;
+  background-color: var(--bg);
+  z-index: 100;
+  transform-origin: center bottom;
+  transform: scaleY(0);
+}
+
+.cover-up {
+  animation: foldUp 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes foldUp {
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+.bumpUp {
+  animation: bump 0.2s ease-in forwards;
+}
+
+@keyframes bump {
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.cover-down {
+  animation: showDown 0.75s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  transform: scaleY(1);
+}
+
+@keyframes showDown {
+  0% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+.up {
+  display: inline-block;
+  transform: translateY(21px);
+  animation: upty 0.5s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+  animation-delay: 0.5s;
+}
+
+.up:nth-child(1) {
+  animation-delay: 0.5s;
+} 
+
+.up:nth-child(2) {
+  animation-delay: 0.6s;
+} 
+
+.up:nth-child(3) {
+  animation-delay: 0.7s;
+} 
+
+.up:nth-child(4) {
+  animation-delay: 0.8s;
+} 
+
+.up:nth-child(5) {
+  animation-delay: 0.9s;
+} 
+
+@keyframes upty {
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.veiled {
+  position: relative;
+}
+
+.veiled:after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg);
+  transform-origin: center bottom;
+  animation: veilDown 0.3s ease-out forwards;
+}
+
+.veiled:nth-of-type(1):after {
+  animation-delay: 0.5s;
+}
+
+.veiled:nth-of-type(2):after {
+  animation-delay: 0.6s;
+}
+
+.veiled:nth-of-type(3):after {
+  animation-delay: 0.7s;
+}
+
+.veiled:nth-of-type(4):after {
+  animation-delay: 0.8s;
+}
+
+.veiled:nth-of-type(5):after {
+  animation-delay: 0.9s;
+}
+
+@keyframes veilDown {
+  100% { 
+    transform: scaleY(0);
+  } 
+}
+
+.big-veiled {
+  position: relative;
+  border: none;
+}
+
+.big-veiled:after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg);
+  transform-origin: center top;
+  animation: bigVeilDown 0.5s ease-out forwards;
+  animation-delay: 0.7s;
+  border: 1px solid var(--bg);
+}
+
+.big-veiled-top:after {
+  transform-origin: center bottom !important;
+  animation-delay: 0.4s;
+  animation-duration: 1s;
+}
+
+@keyframes bigVeilDown {
+  100% { 
+    transform: scaleY(0);
+  } 
 }
